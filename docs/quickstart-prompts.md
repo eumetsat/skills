@@ -83,3 +83,12 @@ These prompts require an authorized Feature Database endpoint and the separately
 Use feature-db-client to write a read-only feature query for my configured endpoint.
 Load credentials from the environment and do not print them. Do not execute writes.
 ```
+
+## Climate Data Records
+
+These prompts need no credentials until you search or download through the eumdac skill.
+
+```text
+Use ml-menu-cdr to tell me which EUMETSAT record gives monthly surface albedo over West Africa since 2000,
+and which files and variable to use. Do not download anything.
+```

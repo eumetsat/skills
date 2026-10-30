@@ -6,7 +6,7 @@
 
 ## What This Is
 
-This repository contains portable EUMETSAT agent skills, currently: `eumdac` for data access, `ewccli` for European Weather Cloud operations, `firecube` for ingestion and plugin development, `esf-satellite-data` for selecting feature-based satellite datasets, and `feature-db-client` for querying and saving feature records. The last two require access to separately operated services.
+This repository contains portable EUMETSAT agent skills, currently: `eumdac` for data access, `ewccli` for European Weather Cloud operations, `firecube` for ingestion and plugin development, `esf-satellite-data` for selecting feature-based satellite datasets, `feature-db-client` for querying and saving feature records, and `ml-menu-cdr` for choosing climate data records on the Data Store. `esf-satellite-data` and `feature-db-client` require access to separately operated services.
 
 Think of this repo as:
 
@@ -18,7 +18,7 @@ Think of this repo as:
 
 ```text
 eumetsat-skills/
-├── skills/{eumdac,ewccli,firecube,esf-satellite-data,feature-db-client}/
+├── skills/{eumdac,ewccli,firecube,esf-satellite-data,feature-db-client,ml-menu-cdr}/
 │   ├── SKILL.md
 │   ├── agents/openai.yaml
 │   └── references/
@@ -159,6 +159,7 @@ Update the skill when:
 - European Weather Cloud changes login/profile, Community Hub, OpenStack credential, infrastructure, or custom catalogue workflows.
 - Firecube releases a new PyPI version that adds, renames, or removes CLI commands/options, plugin templates, or hooks.
 - ESF MCP or Feature Database client contracts and access requirements change.
+- EUMETSAT adds, ends or renames climate data record collections, filename prefixes or variables.
 - Real prompt/response tests reveal missing guidance or unsafe defaults.
 - Examples expose recurring user intents that should be covered by routing or references.
 

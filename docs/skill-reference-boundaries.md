@@ -72,3 +72,11 @@ Keep service-specific values configurable and document the supported MCP contrac
 - `reference-data-and-errors.md`: per-type `get_*`/`create_*`/`update_*` table and exception classes.
 
 Keep the environment write policy and secret hygiene in `SKILL.md`; they gate every reference.
+
+## Climate Data Records
+
+- `records.md`: one entry per record in the CDR menu: Data Store title and ID, sensor and platform, period, coverage, resolution, time step, contents, variables, example filename, packaging and notes. Generated from the menu; regenerate it when the menu changes.
+- `troubleshooting.md`: symptom, cause and action for searches that return too much or nothing, area searches that miss files, and files that will not open or hold no variables; limitations to mention when they affect a request.
+- `python-template.md`: the Python search, filtered download and open template and how to adapt it.
+
+Keep the records table, the filter rule, the answer-first rule and the hand-off to the `eumdac` skill in `SKILL.md`. Download commands, credentials and the download gate belong to `eumdac`; do not copy them here. Record facts come from the CDR menu; phrase its discrepancy notes as help for a symptom, not as a permanent fact.

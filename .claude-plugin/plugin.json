@@ -1,7 +1,7 @@
 {
   "name": "eumetsat-skills",
   "version": "0.1.0",
-  "description": "EUMETSAT agent skills: eumdac, ewccli, firecube, esf-satellite-data, feature-db-client",
+  "description": "EUMETSAT agent skills: eumdac, ewccli, firecube, esf-satellite-data, feature-db-client, ml-menu-cdr",
   "skills": "./skills/",
   "author": {
     "name": "Armagan Karatosun",

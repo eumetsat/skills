@@ -8,6 +8,16 @@ Versions follow [Semantic Versioning](https://semver.org/); the version in
 
 ## [Unreleased]
 
+### Added
+
+- `ml-menu-cdr`: a new skill that matches a climate need to one of the
+  38 climate data records in the EUMETSAT Climate Services CDR menu (version 3)
+  and gives the Data Store collection ID, the filename filter and the variable
+  to read, with troubleshooting for searches and files. Downloads go through
+  the `eumdac` download gate.
+- `ml-menu-cdr`: eval cases `prefix-filter-before-search`,
+  `download-goes-through-eumdac-gate` and `area-search-on-misplaced-footprint`.
+
 ## [0.1.0] - 2026-10-24
 
 First tagged release.

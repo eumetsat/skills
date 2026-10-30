@@ -7,9 +7,9 @@
 <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/version-0.1.0-informational" alt="version"></a>
 </p>
 
-This repository gives your coding agent five skills for working with EUMETSAT tools. A skill is a `SKILL.md` file in the Agent Skills format. It holds the commands and the safety rules for one tool or service. Claude Code, Codex, OpenCode, VS Code, and any other client of the Agent Skills format can load the skills.
+This repository gives your coding agent six skills for working with EUMETSAT tools. A skill is a `SKILL.md` file in the Agent Skills format. It holds the commands and the safety rules for one tool or service. Claude Code, Codex, OpenCode, VS Code, and any other client of the Agent Skills format can load the skills.
 
-With the skills loaded, your agent can search and download satellite data from the EUMETSAT Data Store, run Data Tailor customisations, manage profiles, infrastructure and catalogues on the European Weather Cloud, build Firecube plugins and ingest products into datacubes, and select satellite imagery around detected weather features from the Earth System Feature Database.
+With the skills loaded, your agent can search and download satellite data from the EUMETSAT Data Store, run Data Tailor customisations, manage profiles, infrastructure and catalogues on the European Weather Cloud, build Firecube plugins and ingest products into datacubes, select satellite imagery around detected weather features from the Earth System Feature Database, and find the right climate data record, files and variables on the Data Store.
 
 Installing the skills needs no account. The table below lists what each skill needs when you run its workflows.
 
@@ -22,6 +22,7 @@ Installing the skills needs no account. The table below lists what each skill ne
 | [firecube](skills/firecube/SKILL.md) | Runs Firecube batch ingestion, which turns Earth Observation products into analysis-ready datacubes. Covers plugin development. | Firecube 0.1.7 on Python 3.12+. For execution, an appropriate plugin and source files. |
 | [esf-satellite-data](skills/esf-satellite-data/SKILL.md) | Builds reproducible satellite imagery datasets around detected weather features from the Earth System Feature database. The imagery comes from the EUMETSAT Data Store, EUMETSAT S3 buckets, or AWS Open Data. | The internal esf MCP server 0.9.0 (`feature-db-api`), registered with your agent. Data Store or S3 access for the imagery. Access permissions, endpoint and credentials for the esf server come from your service administrator. |
 | [feature-db-client](skills/feature-db-client/SKILL.md) | Fetches and saves Earth System Feature Database features as GeoDataFrames with the `feature_client` Python library. Runs spatial, temporal, and tag queries and nearest-feature search. | The feature-client package 0.1.0, a public package that needs no entitlement to install. Access permissions for the Feature Database service: an authorised endpoint and API key from your service administrator. |
+| [ml-menu-cdr](skills/ml-menu-cdr/SKILL.md) | Matches a climate need to one of 38 EUMETSAT climate data records on the Data Store: clouds, radiation, albedo, precipitation, winds, atmospheric composition, sounder radiances, Meteosat imagery, scatterometer and sea ice. Gives the collection ID, the filename filter and the variable to read, and troubleshoots searches and files. Hands downloads to the eumdac skill. | Nothing to choose a record. For searches and downloads, what the eumdac skill needs. xarray to open the files. |
 
 ## Getting Started
 
@@ -35,7 +36,7 @@ The skills do not install runtime tools or credentials. Prepare the following:
 
 ### Installing
 
-The repository is a plugin marketplace (`.claude-plugin/marketplace.json`) and a plain skills folder. Choose the install path for your agent. Each path installs all five skills.
+The repository is a plugin marketplace (`.claude-plugin/marketplace.json`) and a plain skills folder. Choose the install path for your agent. Each path installs all six skills.
 
 #### Claude Code
 

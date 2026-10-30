@@ -1,6 +1,6 @@
 {
   "name": "eumetsat",
-  "description": "EUMETSAT agent skills: eumdac, ewccli, firecube, esf-satellite-data, feature-db-client",
+  "description": "EUMETSAT agent skills: eumdac, ewccli, firecube, esf-satellite-data, feature-db-client, ml-menu-cdr",
   "owner": {
     "name": "EUMETSAT",
     "email": "armagan.karatosun@eumetsat.int"
@@ -8,7 +8,7 @@
   "plugins": [
     {
       "name": "eumetsat-skills",
-      "description": "EUMETSAT agent skills: eumdac, ewccli, firecube, esf-satellite-data, feature-db-client",
+      "description": "EUMETSAT agent skills: eumdac, ewccli, firecube, esf-satellite-data, feature-db-client, ml-menu-cdr",
       "category": "development",
       "source": "./"
     }

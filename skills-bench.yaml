@@ -21,7 +21,7 @@
 # Repository conventions checked by `skills-bench validate .` (see docs/validation.md).
 version: 1
 skills_dir: skills
-required_skills: [eumdac, ewccli, firecube, esf-satellite-data, feature-db-client]
+required_skills: [eumdac, ewccli, firecube, esf-satellite-data, feature-db-client, ml-menu-cdr]
 frontmatter:
   allowed_keys: [name, description, license, compatibility, metadata]   # the agentskills.io specification's fields, nothing client-specific
   description_max_chars: 1024
@@ -38,6 +38,7 @@ references:
   firecube: [install.md, cli-surface.md, configuration-storage.md, ingestion.md, plugin-development.md, plugin-traps.md, templates.md, parallelism.md, benchmarks.md, zarr-parquet-archive.md, chunks-catalog.md, performance.md, troubleshooting.md]
   esf-satellite-data: [workflow.md, parameters-to-iterate.md, mcp-tools.md, data-sources.md, destinations-and-credentials.md, streaming-and-stac.md, zarr-store-template.md, download-script-template.md, error-cases.md]
   feature-db-client: [querying.md, saving-features.md, reference-data-and-errors.md]
+  ml-menu-cdr: [records.md, troubleshooting.md, python-template.md]
 cli_checks:
   # Resolved on PATH (a repo-relative path is tried first); every check is skipped when the tool is absent,
   # so a fresh clone or CI without the tools still validates. Install the CLIs to make the checks run.
