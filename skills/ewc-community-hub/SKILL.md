@@ -1,6 +1,6 @@
 ---
 name: ewc-community-hub
-description: Use when submitting, creating, editing, or validating an item in the EWC Community Hub catalog (ewcloud/ewc-community-hub) — drafting items.yaml metadata, annotations, values/inputSpec, opening a catalog pull request, or running the metadata schema validator.
+description: Use when contributing an item to the EWC Community Hub catalog (ewcloud/ewc-community-hub) — drafting or reviewing items.yaml metadata, annotations, values/inputSpec, running the metadata schema validator, testing a new or EWCCLI-compatible item before submission with a custom-catalogue dry-run, or opening the catalog pull request. Not for deploying or operating published items, which belong to the ewccli skill.
 license: CC-BY-4.0
 compatibility: items.yaml schema communityhub.europeanweather.cloud/v1alpha1; local validation needs Docker; PRs need a GitHub account and EWC access.
 metadata:
@@ -31,13 +31,10 @@ wrong.
    image names, flavors, URLs, or maintainer contacts. Use
    [metadata-schema.md](references/metadata-schema.md) for allowed values and
    [official-links.md](references/official-links.md) for official pages;
-       otherwise ask the user. A missing contact is a question to the user, never
-    a placeholder value.
+   otherwise ask the user.
 3. The `spec.items` key must equal the item's `name`. Always check this pair
    when drafting or reviewing an entry.
-4. Every maintainer entry needs at least `email` or `url`; flag the omission
-   rather than fabricating a contact. A missing contact is a question to the
-   user, never a placeholder value.
+4. Every maintainer needs `email` or `url`; flag the omission, ask the user.
 5. In `values.inputSpec`, an entry with `default` is optional and without it
    is mandatory — state which inputs the user must collect before submission.
 6. Use `values.*` for catalogue metadata. For an `EWCCLI-compatible` item also
@@ -55,11 +52,15 @@ wrong.
    Policy review: findings from reading, such as `spec.items` key equal to
    `name` or a maintainer without `email` or `url`; the schema does not
    enforce these, so never present them as schema errors or invent an error
-   count.
-9. If the item is tagged `EWCCLI-compatible`, also recommend the custom
-   catalogue dry-run from [submission.md](references/submission.md) — schema
-   validation alone does not exercise the `ewccli` block. Hand the actual
-   `ewc hub ...` commands to the `ewccli` skill.
+   count. When you propose validation, give both commands from
+   [submission.md](references/submission.md) (`docker build`, then `docker run`)
+   and the success line `/tmp/items.yaml valid`, so the user can confirm by
+   exact output.
+9. If the item is tagged `EWCCLI-compatible`, say first: schema validation does
+   not exercise the `ewccli` block, and the `ewc hub` commands belong to the
+   `ewccli` skill. Then recommend the custom-catalogue dry-run from
+   submission.md, and do not call the PR ready because the dry-run passed; the
+   dry-run stops before any deployment.
 
 ## Response Contract
 
@@ -72,7 +73,11 @@ include:
 3. **Metadata or diff**: the YAML entry (or the exact fields to change),
    following [metadata-schema.md](references/metadata-schema.md). When
    reviewing or correcting user YAML, return only the fields to change, never
-   a complete corrected file with filled-in unknowns.
+   a complete corrected file with filled-in unknowns. In any fix snippet, write
+   a missing contact as `email: <ask the maintainer>`; never an example address
+   or URL. Do not report issues the pasted entry does not have: an absent
+   optional block (`ewccli`, `values.inputSpec`) is not an error.
+
 4. **Validation status**: schema validation (run / not run, output quoted only
    if run) and policy review, as two lines.
 5. **Next step**: local validator command, then the PR.
