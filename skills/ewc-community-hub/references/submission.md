@@ -7,8 +7,9 @@ editing `items.yaml`, validating, and opening the pull request.
 
 - **Only EWC users can contribute items.** Access check:
   <https://europeanweather.cloud/get-access>
-- A **public** source repository for the item (Git URL reachable without
-  credentials) containing a `LICENSE` file and, optionally, an icon.
+- A **publicly accessible, versioned** source location for the item, reachable
+  without credentials. If the source is a Git repository, provide its Git URL
+  and a `LICENSE` file. An icon is optional.
 - Contributions go through a **GitHub pull request** or an EWC Support Portal
   ticket: <https://support.europeanweather.cloud>
 
@@ -37,7 +38,7 @@ CI validates every PR via
 [`.github/workflows/validate.yml`](https://github.com/ewcloud/ewc-community-hub/blob/main/.github/workflows/validate.yml)
 — AJV, JSON Schema draft 2020-12, against `schemas/items/v1alpha1.json`.
 
-Run the **same check locally** (requires Docker; one-time image build):
+Run the same schema validation locally (requires Docker; one-time image build):
 
 ```bash
 # from the root of your ewc-community-hub clone
@@ -61,9 +62,9 @@ Success output:
 ## Testing with a custom catalogue (EWCCLI-compatible items)
 
 Schema validation only proves the metadata is well-formed. If the item is
-tagged `EWCCLI-compatible` in `annotations.others`, the `ewccli` block
-(entrypoint, `inputSpec`, `values`) is exercised only by an actual CLI run —
-test it before opening the PR.
+tagged `EWCCLI-compatible` in `annotations.others`, check the `ewccli` block
+with a custom-catalogue dry-run before opening the PR. The dry-run checks that
+`ewccli` can load the item and its inputs; it does not execute the item.
 
 Put the item entry (same content as in `items.yaml`) in a local custom
 catalogue file:
@@ -87,9 +88,12 @@ ewc hub --path-to-catalog custom-catalogue.yaml deploy my-item --dry-run \
 ```
 
 - `list` / `show` confirm the entry parses and the `ewccli` block is readable.
-- `deploy --dry-run` with **every mandatory input** (each `inputSpec` entry
-  without `default`) confirms the entrypoint resolves and inputs validate,
-  without creating any resource.
+- `--dry-run` checks that the catalogue file loads, the item is found and
+  every required input from `ewccli.inputs` is present. It prints `Dry run:
+  skipping OpenStack connection and exiting.` and stops there
+  (`hub_command.py:536-538`). It does not resolve the entrypoint, run the
+  playbook or Terraform, or create cloud resources. A real deployment test is
+  the maintainers' step after the PR.
 - The custom catalogue is a local test artifact — do **not** commit it to the
   hub repository; the PR only touches `items.yaml`.
 

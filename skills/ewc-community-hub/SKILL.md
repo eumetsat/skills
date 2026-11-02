@@ -31,20 +31,31 @@ wrong.
    image names, flavors, URLs, or maintainer contacts. Use
    [metadata-schema.md](references/metadata-schema.md) for allowed values and
    [official-links.md](references/official-links.md) for official pages;
-   otherwise ask the user.
+       otherwise ask the user. A missing contact is a question to the user, never
+    a placeholder value.
 3. The `spec.items` key must equal the item's `name`. Always check this pair
    when drafting or reviewing an entry.
 4. Every maintainer entry needs at least `email` or `url`; flag the omission
-   rather than fabricating a contact.
+   rather than fabricating a contact. A missing contact is a question to the
+   user, never a placeholder value.
 5. In `values.inputSpec`, an entry with `default` is optional and without it
    is mandatory — state which inputs the user must collect before submission.
-6. Prefer `values.*` over deprecated `ewccli` attributes; only `externalIP`
-   and `checkDNS` remain current under `ewccli`.
+6. Use `values.*` for catalogue metadata. For an `EWCCLI-compatible` item also
+   list every input under `ewccli.inputs`: `ewccli` 0.3.1 reads inputs only
+   from `ewccli.inputs` (`hub_command.py:409-410`), while the catalogue schema
+   reads `values.inputSpec`. Keep the two lists identical. The schema keeps
+   `externalIP` and `checkDNS` current and marks the other `ewccli.*` keys
+   deprecated; `ewccli` 0.3.1 still reads them, so mirror them from `values.*`
+   as [metadata-schema.md](references/metadata-schema.md) shows.
 7. Never claim an item is accepted or published: submission ends at the pull
    request; maintainers review it, and outside-org PRs need manual approval
    before CI runs.
-8. Recommend local Docker validation before opening a PR, and quote its exact
-   output (`/tmp/items.yaml valid`) as the validation status.
+8. Report two statuses. Schema validation: quote the validator output
+   (`/tmp/items.yaml valid`) only after you ran it; otherwise write `Not run`.
+   Policy review: findings from reading, such as `spec.items` key equal to
+   `name` or a maintainer without `email` or `url`; the schema does not
+   enforce these, so never present them as schema errors or invent an error
+   count.
 9. If the item is tagged `EWCCLI-compatible`, also recommend the custom
    catalogue dry-run from [submission.md](references/submission.md) — schema
    validation alone does not exercise the `ewccli` block. Hand the actual
@@ -56,11 +67,14 @@ When the answer drafts or reviews metadata or proposes submission steps,
 include:
 
 1. **Workflow type**: metadata drafting, validation, or submission.
-2. **Prerequisites**: EWC access, public source repo with `LICENSE`, GitHub
-   account, Docker (for local validation).
+2. **Prerequisites**: EWC access, publicly accessible versioned source (a Git
+   repo with `LICENSE` when the source is Git), GitHub account, Docker (for local validation).
 3. **Metadata or diff**: the YAML entry (or the exact fields to change),
-   following [metadata-schema.md](references/metadata-schema.md).
-4. **Validation status**: what was validated locally, what was not, and why.
+   following [metadata-schema.md](references/metadata-schema.md). When
+   reviewing or correcting user YAML, return only the fields to change, never
+   a complete corrected file with filled-in unknowns.
+4. **Validation status**: schema validation (run / not run, output quoted only
+   if run) and policy review, as two lines.
 5. **Next step**: local validator command, then the PR.
 
 For short factual questions about fields or links, answer directly without the
@@ -68,9 +82,12 @@ template.
 
 ## Workflow
 
-1. Capture context: item name, technology (Ansible/Terraform/other), source
+1. Route by intent using the table below; load only the matching reference.
+   For an onboarding question (how do I add an item), explain the path first:
+   fork, branch, `items.yaml` entry, local Docker validation, pull request,
+   maintainer review. Ask for item details only when drafting.
+2. Capture context: item name, technology (Ansible/Terraform/other), source
    repo URL, license, maintainers, and whether the entry is new or an edit.
-2. Route by intent using the table below; load only the matching reference.
 3. Draft or review the `items.yaml` entry against
    [metadata-schema.md](references/metadata-schema.md).
 4. Give the local validation commands from

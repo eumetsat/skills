@@ -41,6 +41,5 @@ there. Do not construct new URLs.
 ## Boundary
 
 This skill covers **catalog metadata and submission only**. It does not cover
-deploying or operating Hub items — that is the `ewccli` skill (`ewc hub
-list/show/deploy`). Do not give `ewc` command guidance from this skill beyond
-noting the hand-off.
+deploying or operating Hub items. The `ewc` commands live in the `ewccli`
+skill. Hand off to it for `ewc hub list/show/deploy`.

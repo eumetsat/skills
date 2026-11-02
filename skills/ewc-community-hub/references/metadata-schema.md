@@ -55,8 +55,7 @@ fail validation.
 | `supportLevel` | ✅ | `EWC` (supported by the EWC team) or `Community` (best-effort by maintainers). |
 | `others` | optional | Comma-separated free-form tags, e.g. `Deployable,EWCCLI-compatible`. |
 
-**`values` (deployment config — optional object; supersedes deprecated
-`ewccli` sub-attributes):**
+**`values` (deployment config — optional object; catalogue metadata):**
 
 | Field | Notes |
 | --- | --- |
@@ -75,9 +74,15 @@ fail validation.
 
 - `externalIP` (bool) — assign a public IP to the server.
 - `checkDNS` (bool) — EWCCLI checks the server's DNS record around deploy.
-- ⛔️ **Deprecated** (use `values.*` instead): `pathToMainFile`,
-  `pathToRequirementsFile`, `defaultImageName`, `defaultSecurityGroups`,
-  `inputs`.
+- `inputs` — required for `ewccli` 0.3.1, which reads inputs only from
+  `ewccli.inputs`. It must mirror `values.inputSpec`.
+- `pathToMainFile`, `pathToRequirementsFile`, `defaultImageName`,
+  `defaultSecurityGroups` — deprecated by the schema in favour of
+  `values.pathToMainFile`, `values.pathToRequirementsFile`,
+  `values.osImageName`, `values.osSecurityGroups` (schema reference,
+  `ewccli.*` rows). `ewccli` 0.3.1 still reads the `ewccli.*` form, so the live
+  `items.yaml` carries both with a `# Deprecated in favor of values.*` comment.
+  Do the same for a compatible item.
 
 ## Minimal complete example
 
@@ -112,6 +117,15 @@ spec:
         others: "Deployable,EWCCLI-compatible"
       ewccli:
         externalIP: false
+        inputs:  # mirrors values.*; read by ewccli 0.3.1
+          - name: my_required_input
+            description: "My required input."
+            type: str
+          - name: my_optional_input
+            description: "Optional because it has a default."
+            type: str
+            default: "my default value"
+        pathToMainFile: playbooks/my_item.yml  # mirrors values.*; read by ewccli 0.3.1
       values:
         inputSpec:
           - name: my_required_input
@@ -132,12 +146,13 @@ spec:
 - **Missing maintainer contact**: each maintainer needs `email` or `url`.
 - **Wrong `supportLevel`**: only `EWC` or `Community`.
 - **`licenseType` must be the SPDX full name**, not a short identifier or URL.
-- **`home`/`icon`/`license`/`sources` must be HTTPS** and match
-  `^https://[\w\-\./:#?=&%]+$`.
+- **`home`, `icon`**: the schema requires an HTTPS URL. **`license`,
+  `sources`**: HTTPS is recommended, not enforced.
 - **Required vs optional inputs**: in `values.inputSpec`, an entry with
   `default` is optional; without `default` it is mandatory — EWCCLI refuses to
   deploy when a mandatory input is missing.
-- **Deprecated `ewccli` attributes**: prefer `values.*`; only `externalIP` and
-  `checkDNS` are current under `ewccli`.
+- **`ewccli.inputs`**: required for `ewccli` 0.3.1; it must mirror
+  `values.inputSpec`. `externalIP` and `checkDNS` are the other `ewccli`
+  attributes.
 - **Version format**: `MAJOR.MINOR` or `MAJOR.MINOR.PATCH` only.
 - **No additional properties**: typos fail validation.
