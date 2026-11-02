@@ -33,6 +33,14 @@ If EWCCLI registers new command groups such as Kubernetes, S3, or DNS, add or sp
 
 Do not invent EWC service URLs, Confluence links, Horizon routes, OpenStack command alternatives, or support processes. Add only verified official links, or ask the user for the official article or permission to look it up.
 
+## EWC Community Hub
+
+- `metadata-schema.md`: `items.yaml` schema fields, allowed values, a worked example, and common pitfalls.
+- `submission.md`: prerequisites, fork and pull request flow, Docker validation, and the custom-catalogue dry-run.
+- `official-links.md`: curated official URLs for the Community Hub catalogue.
+
+The `ewc hub` commands (list, show, deploy) belong to `ewccli`, not to this skill. Keep `ewc-community-hub` on authoring and submitting catalogue items.
+
 ## Firecube
 
 - `install.md`: PyPI install with uv/pip, Python 3.12+ requirement, optional extras, verification, shell completion, and upgrade/uninstall.

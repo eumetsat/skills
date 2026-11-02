@@ -6,7 +6,7 @@
 
 ## What This Is
 
-This repository contains portable EUMETSAT agent skills, currently: `eumdac` for data access, `ewccli` for European Weather Cloud operations, `firecube` for ingestion and plugin development, `esf-satellite-data` for selecting feature-based satellite datasets, and `feature-db-client` for querying and saving feature records. The last two require access to separately operated services.
+This repository contains portable EUMETSAT agent skills, currently: `eumdac` for data access, `ewccli` for European Weather Cloud operations, `ewc-community-hub` for drafting, validating and submitting Community Hub catalogue items, `firecube` for ingestion and plugin development, `esf-satellite-data` for selecting feature-based satellite datasets, and `feature-db-client` for querying and saving feature records. The last two require access to separately operated services.
 
 Think of this repo as:
 
@@ -18,7 +18,7 @@ Think of this repo as:
 
 ```text
 eumetsat-skills/
-├── skills/{eumdac,ewccli,firecube,esf-satellite-data,feature-db-client}/
+├── skills/{eumdac,ewccli,ewc-community-hub,firecube,esf-satellite-data,feature-db-client}/
 │   ├── SKILL.md
 │   ├── agents/openai.yaml
 │   └── references/

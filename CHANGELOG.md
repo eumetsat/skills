@@ -8,6 +8,10 @@ Versions follow [Semantic Versioning](https://semver.org/); the version in
 
 ## [Unreleased]
 
+### Added
+
+- `ewc-community-hub`: new skill for drafting, validating and submitting EWC Community Hub catalogue items, with four eval cases.
+
 ## [0.1.0] - 2026-10-24
 
 First tagged release.
