@@ -16,7 +16,7 @@ Versions follow [Semantic Versioning](https://semver.org/); the version in
   to read, with troubleshooting for searches and files. Downloads go through
   the `eumdac` download gate.
 - `ml-menu-cdr`: eval cases `prefix-filter-before-search`,
-  `download-goes-through-eumdac-gate` and `area-search-on-misplaced-footprint`.
+  `record-choice-before-any-search` and `area-search-on-misplaced-footprint`.
 
 ## [0.1.0] - 2026-10-24
 
