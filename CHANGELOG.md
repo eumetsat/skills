@@ -10,6 +10,7 @@ Versions follow [Semantic Versioning](https://semver.org/); the version in
 
 ### Added
 
+- `ewc-community-hub`: new skill for drafting, validating and submitting EWC Community Hub catalogue items, with four eval cases.
 - `ml-menu-cdr`: a new skill that matches a climate need to one of the
   38 climate data records in the EUMETSAT Climate Services CDR menu (version 3)
   and gives the Data Store collection ID, the filename filter and the variable

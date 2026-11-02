@@ -21,7 +21,7 @@
 # Repository conventions checked by `skills-bench validate .` (see docs/validation.md).
 version: 1
 skills_dir: skills
-required_skills: [eumdac, ewccli, firecube, esf-satellite-data, feature-db-client, ml-menu-cdr]
+required_skills: [eumdac, ewccli, firecube, esf-satellite-data, feature-db-client, ewc-community-hub, ml-menu-cdr]
 frontmatter:
   allowed_keys: [name, description, license, compatibility, metadata]   # the agentskills.io specification's fields, nothing client-specific
   description_max_chars: 1024
@@ -35,6 +35,7 @@ require:
 references:
   eumdac: [install.md, auth.md, datastore-discovery.md, datastore-filtering.md, datastore-download.md, datastore-metalink.md, python-api.md, tailor-orders.md, subscriptions-livefeed.md, troubleshooting.md]
   ewccli: [install.md, auth-profiles.md, hub.md, infra.md, vm-images.md, vm-plans.md, custom-catalogues.md, official-links.md, troubleshooting.md]
+  ewc-community-hub: [metadata-schema.md, official-links.md, submission.md]
   firecube: [install.md, cli-surface.md, configuration-storage.md, ingestion.md, plugin-development.md, plugin-traps.md, templates.md, parallelism.md, benchmarks.md, zarr-parquet-archive.md, chunks-catalog.md, performance.md, troubleshooting.md]
   esf-satellite-data: [workflow.md, parameters-to-iterate.md, mcp-tools.md, data-sources.md, destinations-and-credentials.md, streaming-and-stac.md, zarr-store-template.md, download-script-template.md, error-cases.md]
   feature-db-client: [querying.md, saving-features.md, reference-data-and-errors.md]

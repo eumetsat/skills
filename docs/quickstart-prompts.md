@@ -44,6 +44,20 @@ Help me dry-run an EWC Community Hub deployment.
 Check a custom EWC Hub catalogue before deployment.
 ```
 
+## EWC Community Hub
+
+```text
+I want to add an item to the EWC Community Hub, what should I do?
+```
+
+```text
+Draft the items.yaml entry for my Ansible item <repo URL>; here are its details ...
+```
+
+```text
+Is this items.yaml entry valid and can I submit it? <paste>
+```
+
 ## Firecube
 
 ```text
