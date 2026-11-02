@@ -1,6 +1,6 @@
 ---
 name: ml-menu-cdr
-description: Use when the user wants EUMETSAT climate data records (CDRs) or long satellite climate time series - clouds, albedo, surface or TOA radiation, precipitation, winds (atmospheric motion vectors), aerosol, ozone, SO2, CO, temperature and humidity profiles, microwave or infrared sounder radiances, scatterometer backscatter, Meteosat imagery or sea ice. Matches the need to a Data Store collection ID, the filename filter and the variable to read, and troubleshoots searches and files. Hands downloads to the eumdac skill.
+description: Use first, before eumdac, when the user wants a long satellite climate time series or a climate data record (CDR) and needs to know which EUMETSAT Data Store collection holds it - picks one of the 38 CDR menu records, gives its collection ID, the filename filter and the variable to read, and troubleshoots CDR searches and files. Covers clouds, albedo, radiation, precipitation, winds, aerosol, ozone, trace gases, sounder radiances, scatterometer, Meteosat imagery, sea ice. Hands the download itself to eumdac.
 license: CC-BY-4.0
 compatibility: Record selection needs no tool. Searches and downloads use the eumdac skill (eumdac 3.1.1, Data Store credentials in ~/.eumdac, network access to api.eumetsat.int). Opening files needs xarray with netCDF4 or h5netcdf.
 metadata:
@@ -40,7 +40,7 @@ Period ends are from the menu; "present" means the record is still extended.
 | GIRAFE precipitation | `EO:EUM:DAT:0921` | 2002-01-01 to present | Global, 1° | Daily, monthly | `PREdm*`, `PREmm*` → `precipitation` |
 | OCA cloud analysis (SEVIRI) | `EO:EUM:DAT:0617` | 2004-01-19 to 2019-08-31 | MSG 0° disk | 15-minute | `cloud_top_pressure`, `cloud_probability`, `cloud_particle_effective_radius`, `scene_classification` |
 | GSA land surface albedo, MFG and MSG 0° | `EO:EUM:DAT:0300` | 1982-02-10 to 2017-12-31 | Meteosat 0° disk | 10-day | `DHR30` (black-sky), `BHRiso` (white-sky) |
-| GSA land surface albedo, 57°E | `EO:EUM:DAT:0301` | 2006-12-07 to 2017-03-31 | Meteosat 57°E disk | 10-day | `DHR30`, `BHRiso`; no `--bbox` (footprint misplaced) |
+| GSA land surface albedo, 57°E | `EO:EUM:DAT:0301` | 2006-12-07 to 2017-03-30 | Meteosat 57°E disk | 10-day | `DHR30`, `BHRiso`; no `--bbox` (footprint misplaced) |
 | GSA land surface albedo, 63°E | `EO:EUM:DAT:0302` | 1998-07-10 to 2007-04-10 | Meteosat 63°E disk | 10-day | `DHR30`, `BHRiso`; no `--bbox` (footprint misplaced) |
 | **Winds (atmospheric motion vectors)** | | | | | |
 | AMVs, MFG and MSG 0° | `EO:EUM:DAT:0405` | 1981-09-03 to 2019-09-01 | Meteosat 0° disk | 2-hourly MFG, hourly MSG | `speed`, `dir`, `u`, `v`, `height` |
@@ -77,7 +77,7 @@ Period ends are from the menu; "present" means the record is still extended.
 | ASCAT L1B 25 km (SZO) | `EO:EUM:CM:METOP:ASCSZOR02` | 2007-01-01 to 2014-04-01 | Global | Per orbit | EPS native: `SIGMA0_TRIP`, `KP`, `INC_ANGLE_TRIP`, `AZI_ANGLE_TRIP` |
 | ASCAT L1B 12.5 km (SZR) | `EO:EUM:CM:METOP:ASCSZRR02` | 2007-01-01 to 2014-04-01 | Global | Per orbit | EPS native: as SZO |
 | **Sea ice** | | | | | |
-| AMSR sea ice concentration | `EO:EUM:DAT:1064` | 2021-01-01 to present | Each hemisphere, 25 km | Daily (unconfirmed) | `ice_conc_nh_*_icdr-*` (`sh` south, `icdrft` near-real time) → `ice_conc` |
+| AMSR sea ice concentration | `EO:EUM:DAT:1064` | 2021-01-01 to present | Each hemisphere, 25 km | Daily (unconfirmed) | `ice_conc_nh_*_icdr-*` (`sh` south, `icdrft` near-real time, FTP/THREDDS only per collection metadata) → `ice_conc` |
 | DMSP sea ice concentration | `EO:EUM:DAT:0645` | 2023-09-03 to present | Each hemisphere, 26 × 25 km | Daily | `ice_conc_nh_*` (`sh` south) → `ice_conc` |
 
 IASI and MHS filters select one satellite (`METOPA` or `METOPB`, `NOAA18` or `NOAA19`); drop the filter for all.

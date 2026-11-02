@@ -12,10 +12,10 @@ itself was unsure of.
 - Measures: AMSR Global Sea Ice Concentration.
 - Sensor and platform: AMSR3, AMSR2 (JAXA); GCOM-W or GOSAT-GW. Orbit: LEO. Level: L3/L4.
 - Period: 2021-01-01 to present. Coverage: global. Spatial resolution: 25 km x 25 km. Time step: Daily per hemisphere (unconfirmed).
-- Contents: Sea ice concentration [ice_conc] for northern hemisphere [nh] or southern hemisphere [sh] in near-real time [NR/ icdrft/osi-438-a] or non time critical [NT/ icdr/ osi-438].
+- Contents: Sea ice concentration [ice_conc] for northern hemisphere [nh] or southern hemisphere [sh] in near-real time [NR/ icdrft/osi-438-a] or non time critical [NT/ icdr/ osi-438] (fast-track files are on FTP/THREDDS only per collection metadata on 2026-11-02; a Data Store search may return none).
 - Variables to read: `ice_conc`.
 - Example filename: `ice_conc_sh_ease2-250_icdrft-v3p0-amsr_202609181200.nc`.
-- Note: Shown as Multimission CDR but GCOM-W and GOSAT-GW data are delivered individually on Data Store. OSI SAF page says monthly composites exist, but the Data Store and metadata give twice-daily data.
+- Note: Shown as Multimission CDR but GCOM-W and GOSAT-GW data are delivered individually on Data Store. OSI SAF page says monthly composites exist, but the collection metadata describes daily files. Per collection metadata on 2026-11-02, fast-track files (`icdrft`, 2-day latency) are available only on FTP/THREDDS servers, so a Data Store search can return only nominal (`icdr`, 16-day latency) files; check with a live search.
 
 ### AMSU-B Microwave Humidity Sounder Climate Data Record Release 1 - NOAA
 
@@ -257,7 +257,7 @@ itself was unsure of.
 - Data Store ID: `EO:EUM:DAT:0301`
 - Measures: Land surface albedo (black-sky and white-sky), Indian Ocean 57°E.
 - Sensor and platform: MVIRI; Meteosat-7. Orbit: GEO. Level: L2.
-- Period: 2006-12-07 to 2017-03-31. Coverage: Meteosat disk at 57°E. Spatial resolution: ~2.5 km. Time step: 10-day.
+- Period: 2006-12-07 to 2017-03-30 (per collection metadata on 2026-11-02). Coverage: Meteosat disk at 57°E. Spatial resolution: ~2.5 km. Time step: 10-day.
 - Contents: Black-sky albedo [DHR30] and white-sky albedo [BHRiso], 0-1.
 - Variables to read: `DHR30`, `BHRiso`.
 - Example filename: `W_XX-EUMETSAT-Darmstadt,SURFACE+SAT,MET07+MVIRI+GSA_C_EUMS_20170322000000_20170331235959_1_OR_FES_E0570_0200.nc`.
@@ -386,7 +386,7 @@ itself was unsure of.
 - Measures: OCA Atmospheric Motion Vectors.
 - Sensor and platform: SEVIRI; MSG1-4. Orbit: GEO. Level: L2.
 - Period: 2004-01-19 to 2019-08-31. Coverage: not global. Spatial resolution: Ground resolution 3 km at sub-satellite point. Time step: Hourly.
-- Contents: Wind vectors AMV speed (ms-1), direction (degree), and height (pressure units hPa).
+- Contents: Wind vectors AMV speed (ms-1), direction (degree), and height (pressure in Pa per collection metadata on 2026-11-02; check the file header, older documents say hPa).
 - Variables to read: `speed`, `dir`, `height`, `u`, `v`.
 - Example filename: `W_XX-EUMETSAT-Darmstadt,WV73+ATMOSPHERE+AMV+OCA,MSG4+SEVIRI_C_EUMG_20190831230000Z_20190901000000Z_1_OR_FES_E0000_0100.nc`.
 - Packaging: BUNDLED. Downloaded product contains 3 nc files for channels IR108, WV62, WV73.
@@ -412,4 +412,3 @@ itself was unsure of.
 - Variables to read: `wind_speed`, `wind_from_direction`, `air_pressure`, `air_temperature`, `u`, `v`.
 - Example filename: `W_XX-EUMETSAT-Darmstadt,VIS_IR_WV+ATMOSPHERE+HRW,MSG3+SEVIRI_C_EUMG_20200403T234500Z_20200403T235500Z_1_OR_RSS_E0950_0100.nc`.
 - Packaging: Internal variables are nested under channel groups: wind_ir108, wind_wv062, wind_wv073, wind_hrvis, wind_vis06.
-
