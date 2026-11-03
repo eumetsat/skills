@@ -15,20 +15,20 @@ ewc infra --help
 python -c "import ewccli; print(ewccli.__file__)"
 ```
 
-Avoid using `ewc infra create --help` or `ewc infra delete --help` as generic credential-free checks. In `ewccli 0.3.1`, infra subcommand help can initialize profile/OpenStack configuration and print missing-credential diagnostics before showing help.
+Avoid using `ewc infra create --help` or `ewc infra delete --help` as generic credential-free checks. In `ewccli 0.10.0`, infra subcommand help can initialize profile/OpenStack configuration and print missing-credential diagnostics before showing help.
 
 If `ewc` is missing:
 
 ```bash
 python -m pip show ewccli
-python -m pip install 'ewccli==0.3.1'
+python -m pip install 'ewccli==0.10.0'
 ```
 
 If the installed script is outside `PATH`, add the script directory to the user's shell startup file.
 
 ## Version Drift
 
-The current skill is grounded in `ewccli 0.3.1`. If behavior differs, inspect local help and package metadata:
+The current skill is grounded in `ewccli 0.10.0`. If behavior differs, inspect local help and package metadata:
 
 ```bash
 ewc version
@@ -94,7 +94,7 @@ If an infra command fails with a missing profile key, for example:
 `ssh_public_key_path` key is missing from your profile <profile-name>, please rerun ewc login.
 ```
 
-explain that `ewccli 0.3.1` validates the full profile before running infra subcommands. This can affect `ewc infra list` as well as create/delete workflows.
+explain that `ewccli 0.10.0` validates the full profile before running infra subcommands. This can affect `ewc infra list` as well as create/delete workflows.
 
 Recovery guidance:
 
