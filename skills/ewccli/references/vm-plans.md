@@ -10,7 +10,7 @@ This snapshot is based on the official EWC Knowledge Base pages listed below. Bo
 
 ## Response Rules
 
-1. Say that `ewccli 0.3.1` accepts a flavour with `ewc infra create --flavour-name <flavour-name>`, but does not provide a dedicated `ewc` command to list every available flavour.
+1. Say that `ewccli 0.10.0` accepts a flavour with `ewc infra create --flavour-name <flavour-name>`, but does not provide a dedicated `ewc` command to list every available flavour.
 2. Ask or infer the federee before recommending a flavour. ECMWF and EUMETSAT use different naming schemes.
 3. Do not invent generic availability tables such as "small, medium, large, GPU". Use exact names from the official federee pages or point to the official pages.
 4. Do not mix ECMWF and EUMETSAT flavour names in a command.
@@ -19,12 +19,13 @@ This snapshot is based on the official EWC Knowledge Base pages listed below. Bo
 
 ## EWCCLI Defaults
 
-The inspected `ewccli 0.3.1` source uses these default CPU flavours:
+The inspected `ewccli 0.10.0` source uses these default CPU flavours:
 
-| Federee | Default CPU flavour |
+| Federee / region | Default CPU flavour |
 | --- | --- |
-| ECMWF | `4cpu-4gbmem-30gbdisk` |
-| EUMETSAT | `eo1.large` |
+| ECMWF (CCI1, CCI2) | `4cpu-4gbmem-30gbdisk` |
+| EUMETSAT (WAW3-1) | `eo1.large` |
+| EUMETSAT (ECIS-R1, ECIS-R2) | `4cpu-4gbmem` |
 
 These are defaults for `ewccli`, not the complete service catalogue.
 
@@ -145,15 +146,16 @@ For EUMETSAT GPU plans, the official page says to use an instance type with a na
 ```text
 Workflow type: infrastructure.
 
-ewccli 0.3.1 does not have a command that lists every VM flavour. It accepts a selected flavour through `ewc infra create --flavour-name <flavour-name>`.
+ewccli 0.10.0 does not have a command that lists every VM flavour. It accepts a selected flavour through `ewc infra create --flavour-name <flavour-name>`.
 
 The full list is federee-specific:
 - ECMWF: <official ECMWF VM plans link>
 - EUMETSAT: <official EUMETSAT VM plans link>
 
 Defaults from ewccli are:
-- ECMWF: `4cpu-4gbmem-30gbdisk`
-- EUMETSAT: `eo1.large`
+- ECMWF (CCI1, CCI2): `4cpu-4gbmem-30gbdisk`
+- EUMETSAT (WAW3-1): `eo1.large`
+- EUMETSAT (ECIS-R1, ECIS-R2): `4cpu-4gbmem`
 
 For <selected-federee>, the currently documented plan names are: ...
 

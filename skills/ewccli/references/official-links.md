@@ -42,7 +42,7 @@ When the user asks about an EWC service outside the validated `ewccli` command s
 
 ## Unsupported Command Boundary
 
-`ewccli 0.3.1` registers only `login`, `version`, `hub`, and `infra`. If the user asks for DNS, S3, Kubernetes, IAM, Morpheus, or another EWC workflow that is not exposed by the validated `ewc` command surface, provide the relevant official KB link from this file, or ask to look up current official documentation if no link is listed. Do not expose internal anti-hallucination policy wording in the answer.
+`ewccli 0.10.0` registers only `login`, `version`, `hub`, and `infra`. If the user asks for DNS, S3, Kubernetes, IAM, Morpheus, or another EWC workflow that is not exposed by the validated `ewc` command surface, provide the relevant official KB link from this file, or ask to look up current official documentation if no link is listed. Do not expose internal anti-hallucination policy wording in the answer.
 
 ## Section Root Pages
 

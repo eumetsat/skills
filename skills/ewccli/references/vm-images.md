@@ -12,7 +12,7 @@ This snapshot is based on the official page last modified on 2025-12-09 and chec
 2. Distinguish the table columns:
    - Layout names such as `rocky-9-generic` are not the official EWC Virtual Image name.
    - Use the `EWC Virtual Image name` column when giving exact image names.
-3. Distinguish exact official image names from `ewccli` short selectors. `ewccli 0.3.1` can normalize short selectors such as `Rocky-9`, `Ubuntu-22.04`, `Ubuntu-24.04`, and some GPU selectors to the latest matching OpenStack image, but these short selectors are not the dated official image names in the KB table.
+3. Distinguish exact official image names from `ewccli` short selectors. `ewccli 0.10.0` can normalize short selectors such as `Rocky-9`, `Ubuntu-22.04`, `Ubuntu-24.04`, and some GPU selectors to the latest matching OpenStack image, but these short selectors are not the dated official image names in the KB table.
 4. In getting-started answers, avoid hard-coding a dated image name unless the user asks for a concrete current example. Link to the official page and say to use a current value from the `EWC Virtual Image name` column.
 5. Recheck the official page before treating image names as current; image names are time-versioned and can change.
 
@@ -31,7 +31,7 @@ From the latest table, "Latest version - December 2025":
 
 ## EWCCLI Image Selectors
 
-The inspected `ewccli 0.3.1` source uses `Rocky-9` as the default CPU image selector. This is an `ewccli` selector/prefix, not the official dated image name in the KB table.
+The inspected `ewccli 0.10.0` source uses `Rocky-9` as the default CPU image selector. This is an `ewccli` selector/prefix, not the official dated image name in the KB table.
 
 When users need exact OpenStack image names, send them to the official image page or use values from the `EWC Virtual Image name` column. When users need an `ewccli` command and accept automatic latest-image resolution, explain that `ewccli` can use a supported selector.
 

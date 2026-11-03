@@ -2,7 +2,7 @@
 name: ewccli
 description: Use when working with ewccli, the European Weather Cloud command line interface, for EWC setup, login profiles, OpenStack application credentials, Community Hub item discovery/deployment, infrastructure commands, custom catalogues, or CLI troubleshooting.
 license: CC-BY-4.0
-compatibility: ewccli 0.3.1 on Python 3.11+ and a European Weather Cloud account; live commands need network access to the EWC and OpenStack endpoints.
+compatibility: ewccli 0.10.0 on Python 3.10-3.14 and a European Weather Cloud account; live commands need network access to the EWC and OpenStack endpoints.
 metadata:
   author: EUMETSAT
   version: "0.1.0"
@@ -12,7 +12,7 @@ metadata:
 
 Use this skill for European Weather Cloud (EWC) CLI workflows: installing `ewccli`, validating the `ewc` command, preparing login profiles, handling OpenStack application credentials safely, listing/showing/deploying Community Hub items, using infrastructure commands, testing custom catalogues, or troubleshooting `ewc` errors.
 
-This skill is grounded in `ewccli 0.3.1` and the upstream `ewcloud/ewccli` `main` branch inspected on 2026-04-29. Install that exact version (`ewccli==0.3.1`); a newer release may change the registered command surface, so revalidate this skill before recommending one. Prefer installed `ewc --help` output and official EWC upstream docs when exact flags, item metadata, or service behavior matter.
+This skill is grounded in `ewccli 0.10.0` (released 2026-10-22) and the upstream `ewcloud/ewccli` source inspected on 2026-11-03. Install that exact version (`ewccli==0.10.0`); a newer release may change the registered command surface, so revalidate this skill before recommending one. Prefer installed `ewc --help` output and official EWC upstream docs when exact flags, item metadata, or service behavior matter.
 
 ## Operating Rules
 
@@ -26,6 +26,7 @@ This skill is grounded in `ewccli 0.3.1` and the upstream `ewcloud/ewccli` `main
 8. For exact command flags, run `ewc --help` or `ewc <group> --help` locally before finalizing examples. Some `ewc infra <command> --help` calls initialize profile/OpenStack configuration, so treat them as configured-environment checks.
 9. Locate the CLI with `command -v ewc` before anything else. Never assume a project `.venv`, a personal virtualenv directory, or a repository-specific path; install per [install.md](references/install.md) into standard user-tool locations or an environment the user names.
 10. For `ewc infra`, place `--profile <profile-name>` immediately after `infra`, before the subcommand.
+11. Since `0.10.0`, every server boots from a volume (default root volume 50 GB, sized with `--root-volume`). Treat the root volume as part of the server's configuration when comparing or redeploying.
 
 ## Response Contract
 
@@ -83,7 +84,7 @@ Do not use for:
 
 | Intent or symptom | Read this reference | First checks |
 | --- | --- | --- |
-| Install or verify EWCCLI: `ewc` missing, Python too old, PATH warning | [install.md](references/install.md) | Python 3.11+, package manager, `ewc --help` |
+| Install or verify EWCCLI: `ewc` missing, Python too old, PATH warning | [install.md](references/install.md) | Python 3.10-3.14, package manager, `ewc --help` |
 | Request or configure credential sources, then login: profiles, application credentials, SSH keys, precedence | [auth-profiles.md](references/auth-profiles.md) | Official credential request, received `openrc` or `clouds.yaml`, profile name, federee, tenant, SSH key paths |
 | Use Community Hub items: list/show/deploy, item inputs, dry-run, force | [hub.md](references/hub.md) | Profile, catalogue source, item name, required item inputs |
 | Use infrastructure commands: create/show/list/delete servers | [infra.md](references/infra.md) | Profile, server name, image/flavour/network/security settings |
@@ -95,13 +96,13 @@ Do not use for:
 
 ## Unsupported EWC CLI Capabilities
 
-In `ewccli 0.3.1`, the registered command groups are only `login`, `version`, `hub`, and `infra`. Check the routing table first; VM images, VM plans, login/profile, Hub, custom catalogue, troubleshooting, and official-link requests all have a route.
+In `ewccli 0.10.0`, the registered commands are only `login`, `version`, `hub`, and `infra`. Check the routing table first; VM images, VM plans, login/profile, Hub, custom catalogue, troubleshooting, and official-link requests all have a route.
 
-For requests outside those routes, use workflow type "official EWC link / unsupported ewccli workflow": state that `ewccli 0.3.1` does not provide the workflow, name the registered command groups, explain the nearest validated boundary if there is one, and give the official link from [official-links.md](references/official-links.md) if one is listed. Otherwise ask the user for the official article or whether to look up current official EWC documentation. Present only the boundary and the link in the answer.
+For requests outside those routes, use workflow type "official EWC link / unsupported ewccli workflow": state that `ewccli 0.10.0` does not provide the workflow, name the registered commands, explain the nearest validated boundary if there is one, and give the official link from [official-links.md](references/official-links.md) if one is listed. Otherwise ask the user for the official article or whether to look up current official EWC documentation. Present only the boundary and the link in the answer.
 
 ## Core CLI Surface
 
-`ewccli 0.3.1` installs the `ewc` command and registers only `login`, `version`, `hub`, and `infra`. For exact commands, flags, and profile-option placement, see [hub.md](references/hub.md) and [infra.md](references/infra.md). Always inspect local help before using advanced options:
+`ewccli 0.10.0` installs the `ewc` command and registers only `login`, `version`, `hub`, and `infra`. For exact commands, flags, and profile-option placement, see [hub.md](references/hub.md) and [infra.md](references/infra.md). Always inspect local help before using advanced options:
 
 ```bash
 ewc --help
