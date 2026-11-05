@@ -6,12 +6,12 @@ or configure service credentials. Those are needed only for the workflows you ru
 ## One command per agent
 
 The repository is a Claude Code / Codex plugin marketplace (`.claude-plugin/marketplace.json`) and a plain folder of
-skills, so each agent installs all five skills with one command from the public repository
+skills, so each agent installs all six skills with one command from the public repository
 <https://github.com/eumetsat/skills>.
 
 | Agent | Install | Then |
 | --- | --- | --- |
-| Claude Code | `/plugin marketplace add eumetsat/skills` then `/plugin install eumetsat-skills@eumetsat` | `/reload-plugins`; `/plugin` lists the five skills |
+| Claude Code | `/plugin marketplace add eumetsat/skills` then `/plugin install eumetsat-skills@eumetsat` | `/reload-plugins`; `/plugin` lists the six skills |
 | OpenAI Codex | `codex plugin marketplace add eumetsat/skills` then `codex plugin add eumetsat-skills@eumetsat` | restart Codex; the skills appear as `eumetsat-skills:<name>` |
 | OpenCode | `npx skills add eumetsat/skills -g -a opencode --skill '*' -y` | `opencode debug skill` lists them |
 | Other skills-compatible agents | `npx skills add eumetsat/skills -g -a <agent> --skill '*' -y` | see <https://agentskills.io/clients> for the directory each client reads |
