@@ -19,8 +19,10 @@ Store.
    most two, with `--limit`.
 2. The Data Store wins. When a value here disagrees with a live `eumdac describe` or `eumdac search`, use the live
    value and tell the user in one line.
-3. Do not download from this skill. Hand the collection ID, time range and filter to the `eumdac` skill; its download
-   gate (count, size, free space, destination, explicit authorisation) applies unchanged.
+3. Do not download from this skill. When the user wants the files, end the answer by listing what must be settled
+   before the `eumdac` skill downloads: product count, total size, destination directory, free space there, and the
+   user's explicit go-ahead. State these as required, not optional. Then hand the collection ID, time range and filter
+   to the `eumdac` skill; its download gate applies unchanged.
 4. CLARA-A3, SARAH and GIRAFE hold every product and time step in one collection. Always filter on the product code
    plus the time-step code, for example `--filename "SALmm*"`. Never search or download them without that filter.
 5. Give a variable name only when the table or [records.md](references/records.md) lists it. Otherwise tell the user
@@ -122,4 +124,4 @@ timeout 120 eumdac search --collection "EO:EUM:DAT:0874" --filename "SALmm*" --s
 
 Give the record name and collection ID, the filter, the variable, and any limitation that affects the request. State
 what you checked live and what comes from this skill. For ML or trend use, name the items from "Long time series"
-that touch the requested period.
+that touch the requested period. When the user will fetch files, list the five download prerequisites from Rule 3.
