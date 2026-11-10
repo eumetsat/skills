@@ -19,6 +19,6 @@
 # SOFTWARE.
 
 interface:
-  display_name: "Climate Data Records"
+  display_name: "ML Menu: Climate Data Records"
   short_description: "Pick an EUMETSAT climate data record and the collection ID, filename filter and variable to use"
-  default_prompt: "Use $ml-menu-cdr to find the EUMETSAT climate data record, filename filter and variable for the data I describe."
+  default_prompt: "Use $ml-menu to find the EUMETSAT climate data record, filename filter and variable for the data I describe."

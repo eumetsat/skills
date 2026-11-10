@@ -103,6 +103,6 @@ Load credentials from the environment and do not print them. Do not execute writ
 These prompts need no credentials until you search or download through the eumdac skill.
 
 ```text
-Use ml-menu-cdr to tell me which EUMETSAT record gives monthly surface albedo over West Africa since 2000,
+Use ml-menu to tell me which EUMETSAT record gives monthly surface albedo over West Africa since 2000,
 and which files and variable to use. Do not download anything.
 ```

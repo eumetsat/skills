@@ -97,7 +97,7 @@ itself was unsure of.
 - Data Store ID: `EO:EUM:DAT:0874`
 - Measures: CLARA-A3 cLoud, Albedo, surface Radiation.
 - Sensor and platform: AVHRR; Metop, TIROS, NOAA. Orbit: LEO. Level: L3.
-- Period: 1979-01-01 to present. Coverage: global and polar. Spatial resolution: 0.25° x 0.25°. Time step: Daily, monthly 5-day.
+- Period: 1979-01-01 to present. Coverage: global and polar. Spatial resolution: 0.25° x 0.25°. Time step: `dm` daily, `mm` monthly, `pm` 5-day (SAL).
 - Contents: Fractional cloud cover [CFC], Cloud phase [CPH], Cloud top parameters [CTO], TOA Outgoing Longwave Radiation [OLR] and Reflected Solar Flux [RSF], Surface albedo [SAL], Surface Radiation products [SDL, SIS, SNL, SNS, SRB],.
 - Variables to read: `blue_sky_albedo_all_mean` for surface albedo (`SAL`). For the other products, inspect one file first.
 - Example filename: `SALmm20260801000000319AVPOSI1GL.nc`.

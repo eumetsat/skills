@@ -1,6 +1,6 @@
 ---
-name: ml-menu-cdr
-description: Use first, before eumdac, when the user wants a long satellite climate time series or a climate data record (CDR) and needs to know which EUMETSAT Data Store collection holds it - picks one of the 38 CDR menu records, gives its collection ID, the filename filter and the variable to read, and troubleshoots CDR searches and files. Covers clouds, albedo, radiation, precipitation, winds, aerosol, ozone, trace gases, sounder radiances, scatterometer, Meteosat imagery, sea ice. Hands the download itself to eumdac.
+name: ml-menu
+description: "Works with the EUMETSAT Data Store and eumdac to find climate data records (CDRs) for long time series: ML model training, trend analysis and anomaly detection. Picks one of the 38 CDR menu records and gives its collection ID, filename filter and variable, and flags what breaks a long series (interim extensions, satellite changes, sampling changes). Covers clouds, albedo, radiation, precipitation, winds, aerosol, ozone, trace gases, sounder radiances, scatterometer, Meteosat imagery and sea ice. Hands downloads to eumdac."
 license: CC-BY-4.0
 compatibility: Record selection needs no tool. Searches and downloads use the eumdac skill (eumdac 3.1.1, Data Store credentials in ~/.eumdac, network access to api.eumetsat.int). Opening files needs xarray with netCDF4 or h5netcdf.
 metadata:
@@ -15,8 +15,8 @@ Store.
 
 ## Rules
 
-1. Answer from this skill first. Give the record, collection ID, filter and variable from the table below before
-   running any live search. Live searches are optional checks: run at most two, with `--limit`, after the answer.
+1. Answer from the table below without running `eumdac`. Run a live search only when the user asks for one, at
+   most two, with `--limit`.
 2. The Data Store wins. When a value here disagrees with a live `eumdac describe` or `eumdac search`, use the live
    value and tell the user in one line.
 3. Do not download from this skill. Hand the collection ID, time range and filter to the `eumdac` skill; its download
@@ -53,15 +53,15 @@ Period ends are from the menu; "present" means the record is still extended.
 | AVHRR global AMVs, Metop-A/B tandem | `EO:EUM:DAT:0151` | 2013-04-24 to 2017-12-31 | Global | Daily | EPS native |
 | AVHRR polar AMVs, Metop-A and -B | `EO:EUM:DAT:0152` | 2007-03-01 to 2017-12-31 | Poleward of 45° | Per orbit | EPS native |
 | **Atmospheric composition and profiles (IASI, GOME-2)** | | | | | |
-| IASI temperature and humidity profiles | `EO:EUM:DAT:0576` | 2007-07-10 to 2023-12-31 | Global | Twice daily | `*METOPB+PW3*` → `T`, `W`, `pressure_levels`, `Ts`, `Ps` |
-| IASI ozone | `EO:EUM:DAT:1027` | 2007-07-10 to 2023-12-31 | Global | Twice daily | `*METOPB+O3*` → `o3_x_o3`, `o3_cp_o3_a` |
-| IASI SO2 | `EO:EUM:DAT:0960` | 2007-07-10 to 2023-12-31 | Global | Twice daily | `*METOPB+SO2*` → `so2_col` |
-| IASI CO (FORLI-CO) | `EO:EUM:DAT:0959` | 2007-07-10 to 2023-12-31 | Global | Twice daily | `*METOPB+CO+*` → `co_x_co`, `co_cp_co_a` |
+| IASI temperature and humidity profiles | `EO:EUM:DAT:0576` | 2007-07-10 to 2023-12-31 | Global | Twice daily | `*+PW3+IASI*` → `T`, `W`, `pressure_levels`, `Ts`, `Ps` |
+| IASI ozone | `EO:EUM:DAT:1027` | 2007-07-10 to 2023-12-31 | Global | Twice daily | `*+O3+IASI*` → `o3_x_o3`, `o3_cp_o3_a` |
+| IASI SO2 | `EO:EUM:DAT:0960` | 2007-07-10 to 2023-12-31 | Global | Twice daily | `*+SO2+IASI*` → `so2_col` |
+| IASI CO (FORLI-CO) | `EO:EUM:DAT:0959` | 2007-07-10 to 2023-12-31 | Global | Twice daily | `*+CO+IASI*` → `co_x_co`, `co_cp_co_a` |
 | Multi-sensor aerosol optical properties | `EO:EUM:DAT:0579` | 2007-07-10 to 2019-08-31 | Global | Per orbit | `aerosol_optical_depth`, `aerosol_class` (in netCDF groups) |
 | **Radiances and brightness temperatures** | | | | | |
 | IASI L1C spectra | `EO:EUM:DAT:0590` | 2007-07-10 to 2019-10-01 | Global | Per orbit | EPS native, `GS1cSpect`; about 1.4 GB per file |
 | MHS Release 2, Metop-A and -B | `EO:EUM:DAT:0344` | 2006-10-31 to 2018-12-31 | Global | Per orbit | `btemps` |
-| MHS Release 1, NOAA and Metop | `EO:EUM:DAT:0305` | 2005-08-30 to 2018-01-01 | Global | Per orbit | `*NOAA18*` → `Ch1_BT` to `Ch5_BT`; for Metop use 0344 |
+| MHS Release 1, NOAA and Metop | `EO:EUM:DAT:0305` | 2005-08-30 to 2018-01-01 | Global | Per orbit | `FIDUCEO_FCDR_L1C_MHS_*` → `Ch1_BT` to `Ch5_BT`; for Metop use 0344 |
 | AMSU-B, NOAA-15 to -17 | `EO:EUM:DAT:0303` | 1999-01-01 to 2014-06-06 | Global | Per orbit | `Ch16_BT` to `Ch20_BT` |
 | SSM/T-2, DMSP | `EO:EUM:DAT:0343` | 1994-07-05 to 2005-01-10 | Global | Per orbit | `tb`, `cloud_flag` |
 | ATMS, Suomi-NPP | `EO:EUM:DAT:0345` | 2011-12-10 to 2018-12-31 | Global | Per orbit | `btemps` |
@@ -80,7 +80,22 @@ Period ends are from the menu; "present" means the record is still extended.
 | AMSR sea ice concentration | `EO:EUM:DAT:1064` | 2021-01-01 to present | Each hemisphere, 25 km | Daily (unconfirmed) | `ice_conc_nh_*_icdr-*` (`sh` south, `icdrft` near-real time, FTP/THREDDS only per collection metadata) → `ice_conc` |
 | DMSP sea ice concentration | `EO:EUM:DAT:0645` | 2023-09-03 to present | Each hemisphere, 26 × 25 km | Daily | `ice_conc_nh_*` (`sh` south) → `ice_conc` |
 
-IASI and MHS filters select one satellite (`METOPA` or `METOPB`, `NOAA18` or `NOAA19`); drop the filter for all.
+The IASI and MHS R1 filters cover every satellite in the record. Adding `METOPA` or `METOPB` (IASI), or `NOAA18` or
+`NOAA19` (MHS R1), selects one satellite and shortens the series.
+
+## Long time series
+
+For ML training, trend or anomaly work, check these against the requested period. Facts come from the records
+reference and troubleshooting; the menu documents nothing further.
+
+- Interim records: AMSR (`1064`) and DMSP (`0645`) sea ice are interim CDRs (`icdr` in filenames); "present" means the record is extended.
+- Satellite changes inside a record: IASI (`0576`, `1027`, `0960`, `0959`) and AVHRR polar AMVs (`0152`) span Metop-A and -B, and Metop-B data start 2013-04-24 in `0152`. MHS R1 (`0305`) is superseded by R2 (`0344`) for Metop. `0558` spans TIROS-N, NOAA-6 to -19 and Metop-A/B; `0305` spans NOAA-18, NOAA-19 and Metop-A/B.
+- Sampling changes: `0405` is 2-hourly for MFG and hourly for MSG.
+- Orbital positions are separate records, not one series: 0°, 57°E, 63°E and 41.5°E (for example `0300`, `0301`, `0302`, `0896`).
+- Calibration limits: SEVIRI Rapid Scan (`0962`) recalibration runs only until 04/2020; MVIRI (`0880`, `0881`, `0882`) files carry no geolocation; `0962` holds counts, not radiances.
+- Quality flags: IASI profiles (`0576`) list Q flags; SSM/T-2 (`0343`) lists `cloud_flag`.
+
+The menu does not document homogeneity or breakpoints beyond these. Tell the user so; do not infer any.
 
 ## Workflow
 
@@ -106,4 +121,5 @@ timeout 120 eumdac search --collection "EO:EUM:DAT:0874" --filename "SALmm*" --s
 ## Response contract
 
 Give the record name and collection ID, the filter, the variable, and any limitation that affects the request. State
-what you checked live and what comes from this skill.
+what you checked live and what comes from this skill. For ML or trend use, name the items from "Long time series"
+that touch the requested period.

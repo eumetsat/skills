@@ -1,7 +1,7 @@
 ---
 name: area-search-on-misplaced-footprint
 description: For a collection whose Data Store footprint is misplaced, the agent searches by time only and crops after opening, instead of relying on an area filter. Fixture: user asks for land albedo over a region from the 63°E Meteosat record.
-tags: [ml-menu-cdr, troubleshooting, filtering]
+tags: [ml-menu, troubleshooting, filtering]
 runs: 3
 max_turns: 8
 timeout_seconds: 300

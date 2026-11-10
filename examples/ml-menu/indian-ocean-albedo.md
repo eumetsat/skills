@@ -6,7 +6,7 @@ Give me the eumdac search for land surface albedo over Pakistan for 2003 from th
 
 ## Expected Agent Behavior
 
-- Use the `ml-menu-cdr` skill and answer from its records table.
+- Use the `ml-menu` skill and answer from its records table.
 - Use GSA 63°E (`EO:EUM:DAT:0302`), 10-day, variables `DHR30` (black-sky) and `BHRiso` (white-sky).
 - Search by time only. The Data Store footprint of this collection is misplaced, so a `--bbox` or `--geometry`
   search may miss files; crop to Pakistan after opening.

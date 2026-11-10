@@ -29,13 +29,23 @@ import pathlib
 import xarray as xr
 
 download_dir = pathlib.Path("<directory-reported-by-eumdac>")
-ds = xr.open_mfdataset(sorted(download_dir.glob(f"{PREFIX}*.nc")), combine="by_coords")
-subset = ds[VARIABLE].sel(lat=slice(-5, 20), lon=slice(-70, -20))
+
+
+def keep_region(ds):
+    """Keep only VARIABLE and the region in each file, before the files are combined."""
+    return ds[[VARIABLE]].sel(lat=slice(-5, 20), lon=slice(-70, -20))
+
+
+files = sorted(download_dir.glob(f"{PREFIX}*.nc"))
+subset = xr.open_mfdataset(
+    files, combine="by_coords", chunks={}, parallel=True, preprocess=keep_region
+)[VARIABLE]
 ```
 
 ## Adapt it
 
-- For the long IASI and MHS filenames, set `PREFIX` to a pattern such as `*METOPB+O3`; the glob appends `*`.
+- For the long IASI and MHS filenames, set `PREFIX` to the all-satellite pattern, such as `*+O3+IASI`; the glob appends `*`. Adding `METOPA` or `METOPB` (IASI), or `NOAA18` or `NOAA19` (MHS R1), selects one satellite and shortens the series.
+- Swath records (IASI, MHS, AMSU-B, ATMS, SSM/T-2, MWHS, ASCAT) and MVIRI have no lat/lon grid, so `.sel(lat=..., lon=...)` does not apply.
 - If a download is a zip archive, extract the `.nc` entry before opening it.
 - For SEVIRI Rapid Scan AMVs, pass `group="wind_ir108"` (or another channel group) to `open_dataset`.
 - EPS native records (ASCAT, AVHRR AMVs 0151 and 0152, IASI L1C) are not netCDF: this template does not open them.

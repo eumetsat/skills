@@ -6,7 +6,7 @@ Get me daily Antarctic sea ice concentration for 2023 from EUMETSAT.
 
 ## Expected Agent Behavior
 
-- Use the `ml-menu-cdr` skill and answer from its records table.
+- Use the `ml-menu` skill and answer from its records table.
 - Recommend the AMSR record (`EO:EUM:DAT:1064`), which covers all of 2023. The DMSP record (`EO:EUM:DAT:0645`)
   starts on 2023-09-03, so it covers only part of the year.
 - Filter on the southern hemisphere and one timeliness: `ice_conc_sh_*_icdr-*`. Variable `ice_conc`.

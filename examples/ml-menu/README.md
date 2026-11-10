@@ -1,6 +1,6 @@
 # Climate Data Records Examples
 
-These examples are sanitized scenarios for the `ml-menu-cdr` skill. They are intended as quickstart
+These examples are sanitized scenarios for the `ml-menu` skill. They are intended as quickstart
 scenarios and regression prompts.
 
 Do not treat dates, filenames or product counts as current results. Re-run the searches through the `eumdac` skill

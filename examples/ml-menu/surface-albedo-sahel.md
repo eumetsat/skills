@@ -6,7 +6,7 @@ I need monthly surface albedo over the Sahel for 2000 to 2020 from EUMETSAT. Whi
 
 ## Expected Agent Behavior
 
-- Use the `ml-menu-cdr` skill and answer from its records table.
+- Use the `ml-menu` skill and answer from its records table.
 - Recommend CLARA-A3 (`EO:EUM:DAT:0874`), global from 1979, with the filter `SALmm*` and the variable
   `blue_sky_albedo_all_mean`. GSA (`EO:EUM:DAT:0300`, 10-day, to 2017) is an alternative only if 10-day land albedo
   to 2017 is enough.

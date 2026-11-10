@@ -1,7 +1,7 @@
 ---
 name: prefix-filter-before-search
 description: A request for one product of a collection that holds every product and time step must filter on the filename prefix and time-step code. Fixture: user asks for monthly surface incoming shortwave radiation over Germany.
-tags: [ml-menu-cdr, filtering, routing]
+tags: [ml-menu, filtering, routing]
 runs: 3
 max_turns: 8
 timeout_seconds: 300
