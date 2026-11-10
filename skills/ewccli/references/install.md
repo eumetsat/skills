@@ -4,11 +4,11 @@ Use this reference for installing `ewccli` and checking the local `ewc` command.
 
 ## Requirements
 
-- Python 3.11 or higher.
+- Python 3.10 through 3.14.
 - `git` for custom Hub item deployment from repositories.
 - Network access for package installation and EWC Community Hub catalogue download.
 
-Pin the release this skill covers: `ewccli==0.3.1`. Every command and flag in these references was verified against it, and a newer release may register, rename, or remove `ewc` commands. Move to a newer version only after re-checking `ewc --help` and the upstream changelog at https://github.com/ewcloud/ewccli.
+Pin the release this skill covers: `ewccli==0.10.0`. Every command and flag in these references was verified against it, and a newer release may register, rename, or remove `ewc` commands. Move to a newer version only after re-checking `ewc --help` and the upstream changelog at https://github.com/ewcloud/ewccli.
 
 ## Locate The CLI First
 
@@ -24,10 +24,10 @@ If the executable directory is not on `PATH`, `uv tool update-shell` or adding i
 
 ## Installation Choices
 
-As a user tool (Python 3.11 or newer):
+As a user tool (Python 3.10 or newer):
 
 ```bash
-uv tool install --python 3.11 'ewccli==0.3.1'
+uv tool install --python 3.12 'ewccli==0.10.0'
 ewc --help
 ewc version
 ```
@@ -36,14 +36,14 @@ Into a virtual environment at a path the user names:
 
 ```bash
 python3 -m venv <venv>
-<venv>/bin/python -m pip install 'ewccli==0.3.1'
+<venv>/bin/python -m pip install 'ewccli==0.10.0'
 <venv>/bin/ewc --help
 ```
 
 For an existing Python environment:
 
 ```bash
-python -m pip install 'ewccli==0.3.1'
+python -m pip install 'ewccli==0.10.0'
 ewc --help
 ewc version
 ```

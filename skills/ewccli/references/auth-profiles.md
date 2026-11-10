@@ -131,7 +131,7 @@ ssh_public_key_path =
 ssh_private_key_path =
 ```
 
-Manual profile edits are fragile. `ewccli 0.3.1` loads and validates the full profile before running infra subcommands, including read-style commands such as `ewc infra list`. A hand-edited profile that omits `ssh_public_key_path` or `ssh_private_key_path` can fail before the OpenStack request is made.
+Manual profile edits are fragile. `ewccli 0.10.0` loads and validates the full profile before running infra subcommands, including read-style commands such as `ewc infra list`. A hand-edited profile that omits `ssh_public_key_path` or `ssh_private_key_path` can fail before the OpenStack request is made.
 
 If a user has hand-edited `$HOME/.ewccli/profiles`, prefer one of these recovery paths:
 
@@ -205,6 +205,7 @@ Preferred non-secret command shape. Configure a protected `clouds.yaml`, source 
 ewc login \
   --profile <profile-name> \
   --federee EUMETSAT \
+  --region CCI1 \
   --tenant-name <tenant-name> \
   --ssh-public-key-path $HOME/.ssh/id_rsa.pub \
   --ssh-private-key-path $HOME/.ssh/id_rsa
@@ -212,7 +213,7 @@ ewc login \
 
 For non-interactive automation, prefer a protected `clouds.yaml`, a sourced `openrc`, or environment variables managed by the user's secret store before invoking `ewc login`. Avoid putting `--application-credential-secret` directly in shell history.
 
-`--federee` accepts `EUMETSAT` or `ECMWF`. For the tenant name pattern and sourcing rules, see [Tenant Name Convention And Sources](#tenant-name-convention-and-sources) above. Do not invent a concrete tenant name; use `<memberstate>-<organization>-<projectname>` unless the user provides the real tenant.
+`--federee` accepts `EUMETSAT` or `ECMWF`. `--region` (env `EWC_CLI_LOGIN_REGION`) accepts `CCI1`, `CCI2`, `WAW3-1`, `ECIS-R1`, or `ECIS-R2`, validated against the federee: `ECMWF` allows `CCI1`/`CCI2`; `EUMETSAT` allows `WAW3-1`/`ECIS-R1`/`ECIS-R2`. If omitted, `ewc login` prompts interactively. For the tenant name pattern and sourcing rules, see [Tenant Name Convention And Sources](#tenant-name-convention-and-sources) above. Do not invent a concrete tenant name; use `<memberstate>-<organization>-<projectname>` unless the user provides the real tenant.
 
 ## After Login Validation
 

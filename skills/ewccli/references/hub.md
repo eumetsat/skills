@@ -94,12 +94,16 @@ Common optional deployment flags include:
 --external-ip
 --networks / -n
 --security-groups / -sg
+--root-volume
+--extra-volume
 --ssh-public-key-path
 --ssh-private-key-path
 --auth-url / -url
 --application-credential-id
 --application-credential-secret
 ```
+
+Since `0.10.0`, every deployed server boots from a volume in all regions. `--root-volume <GB>` sets the root volume size (default `50`), and `--extra-volume <GB>` attaches additional data volumes (repeatable). `--networks` and `--security-groups` may be listed in any order when redeploying; they are compared as sets.
 
 Do not recommend passing secrets on the command line unless the user explicitly needs non-interactive execution; environment variables or profiles reduce shell-history exposure.
 
