@@ -1,8 +1,8 @@
 ---
 name: ml-menu
-description: "Works with the EUMETSAT Data Store and eumdac to find climate data records (CDRs) for long time series: ML model training, trend analysis and anomaly detection. Picks one of the 38 CDR menu records and gives its collection ID, filename filter and variable, and flags what breaks a long series (interim extensions, satellite changes, sampling changes). Covers clouds, albedo, radiation, precipitation, winds, aerosol, ozone, trace gases, sounder radiances, scatterometer, Meteosat imagery and sea ice. Hands downloads to eumdac."
+description: "Works with the EUMETSAT Data Store and eumdac to find Climate Data Records, specifically. The skill is designed to improve data discoverability for long time series for training of ML models, trend analysis, anomaly detection. Covers clouds, albedo, radiation, precipitation, winds, aerosol, ozone, trace gases, sounder radiances, scatterometer, Meteosat imagery and sea ice. Hands downloads to eumdac. Use it whenever the user wants multi-year or decades-long satellite data, a training dataset for an ML model, a climatology, or a trend or anomaly analysis, or asks which EUMETSAT record covers a variable over a long period, even without saying 'climate data record'."
 license: CC-BY-4.0
-compatibility: Record selection needs no tool. Searches and downloads use the eumdac skill (eumdac 3.1.1, Data Store credentials in ~/.eumdac, network access to api.eumetsat.int). Opening files needs xarray with netCDF4 or h5netcdf.
+compatibility: "Needs Python with xarray (netCDF4 or h5netcdf) and the eumdac skill: eumdac 3.1.1, Data Store credentials in ~/.eumdac, network access to api.eumetsat.int."
 metadata:
   author: EUMETSAT
   version: "0.1.0"
@@ -15,8 +15,8 @@ Store.
 
 ## Rules
 
-1. Answer from the table below without running `eumdac`. Run a live search only when the user asks for one, at
-   most two, with `--limit`.
+1. Answer from the table below; choosing a record needs no `eumdac` run. Data Store credentials are needed only for
+   searches and downloads. Run a live search only when the user asks for one, at most two, with `--limit`.
 2. The Data Store wins. When a value here disagrees with a live `eumdac describe` or `eumdac search`, use the live
    value and tell the user in one line.
 3. Do not download from this skill. When the user wants the files, end the answer by listing what must be settled
@@ -32,7 +32,8 @@ Store.
 
 ## Records
 
-Period ends are from the menu; "present" means the record is still extended.
+Period ends are from the menu unless marked "checked <date>", which is a later Data Store check; "present" means the
+record is still extended.
 
 | Record | Data Store ID | Period | Coverage | Time step | Filter → variable |
 | --- | --- | --- | --- | --- | --- |
@@ -79,8 +80,8 @@ Period ends are from the menu; "present" means the record is still extended.
 | ASCAT L1B 25 km (SZO) | `EO:EUM:CM:METOP:ASCSZOR02` | 2007-01-01 to 2014-04-01 | Global | Per orbit | EPS native: `SIGMA0_TRIP`, `KP`, `INC_ANGLE_TRIP`, `AZI_ANGLE_TRIP` |
 | ASCAT L1B 12.5 km (SZR) | `EO:EUM:CM:METOP:ASCSZRR02` | 2007-01-01 to 2014-04-01 | Global | Per orbit | EPS native: as SZO |
 | **Sea ice** | | | | | |
-| AMSR sea ice concentration | `EO:EUM:DAT:1064` | 2021-01-01 to present | Each hemisphere, 25 km | Daily (unconfirmed) | `ice_conc_nh_*_icdr-*` (`sh` south, `icdrft` near-real time, FTP/THREDDS only per collection metadata) → `ice_conc` |
-| DMSP sea ice concentration | `EO:EUM:DAT:0645` | 2023-09-03 to present | Each hemisphere, 26 × 25 km | Daily | `ice_conc_nh_*` (`sh` south) → `ice_conc` |
+| AMSR sea ice concentration | `EO:EUM:DAT:1064` | 2021-01-01 to present | Each hemisphere, 25 km | Daily | `ice_conc_nh_*_icdr-*` (`sh` south, `icdrft` near-real time, FTP/THREDDS only per collection metadata) → `ice_conc` |
+| DMSP sea ice concentration | `EO:EUM:DAT:0645` | 2023-09-03 to 2025-09-29 (last product on the Data Store, checked 2026-11-10) | Each hemisphere, 26 × 25 km | Daily | `ice_conc_nh_*` (`sh` south) → `ice_conc` |
 
 The IASI and MHS R1 filters cover every satellite in the record. Adding `METOPA` or `METOPB` (IASI), or `NOAA18` or
 `NOAA19` (MHS R1), selects one satellite and shortens the series.
@@ -90,7 +91,7 @@ The IASI and MHS R1 filters cover every satellite in the record. Adding `METOPA`
 For ML training, trend or anomaly work, check these against the requested period. Facts come from the records
 reference and troubleshooting; the menu documents nothing further.
 
-- Interim records: AMSR (`1064`) and DMSP (`0645`) sea ice are interim CDRs (`icdr` in filenames); "present" means the record is extended.
+- Interim records: AMSR (`1064`) and DMSP (`0645`) sea ice are interim CDRs (`icdr` in filenames). AMSR is still extended; DMSP has no product after 2025-09-29 on the Data Store (checked 2026-11-10).
 - Satellite changes inside a record: IASI (`0576`, `1027`, `0960`, `0959`) and AVHRR polar AMVs (`0152`) span Metop-A and -B, and Metop-B data start 2013-04-24 in `0152`. MHS R1 (`0305`) is superseded by R2 (`0344`) for Metop. `0558` spans TIROS-N, NOAA-6 to -19 and Metop-A/B; `0305` spans NOAA-18, NOAA-19 and Metop-A/B.
 - Sampling changes: `0405` is 2-hourly for MFG and hourly for MSG.
 - Orbital positions are separate records, not one series: 0°, 57°E, 63°E and 41.5°E (for example `0300`, `0301`, `0302`, `0896`).

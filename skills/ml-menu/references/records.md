@@ -11,7 +11,7 @@ itself was unsure of.
 - Data Store ID: `EO:EUM:DAT:1064`
 - Measures: AMSR Global Sea Ice Concentration.
 - Sensor and platform: AMSR3, AMSR2 (JAXA); GCOM-W or GOSAT-GW. Orbit: LEO. Level: L3/L4.
-- Period: 2021-01-01 to present. Coverage: global. Spatial resolution: 25 km x 25 km. Time step: Daily per hemisphere (unconfirmed).
+- Period: 2021-01-01 to present. Coverage: global. Spatial resolution: 25 km x 25 km. Time step: Daily per hemisphere.
 - Contents: Sea ice concentration [ice_conc] for northern hemisphere [nh] or southern hemisphere [sh] in near-real time [NR/ icdrft/osi-438-a] or non time critical [NT/ icdr/ osi-438] (fast-track files are on FTP/THREDDS only per collection metadata on 2026-11-02; a Data Store search may return none).
 - Variables to read: `ice_conc`.
 - Example filename: `ice_conc_sh_ease2-250_icdrft-v3p0-amsr_202609181200.nc`.
@@ -232,7 +232,7 @@ itself was unsure of.
 - Data Store ID: `EO:EUM:DAT:0645`
 - Measures: DMSP Global Sea Ice Concentration.
 - Sensor and platform: SSMIS; DMSP. Orbit: LEO. Level: L3/L4.
-- Period: 2023-09-03 to present. Coverage: global. Spatial resolution: 26 km x 25 km. Time step: Daily per hemisphere.
+- Period: 2023-09-03 to 2025-09-29 (last product on the Data Store, checked 2026-11-10). Coverage: global. Spatial resolution: 26 km x 25 km. Time step: Daily per hemisphere.
 - Contents: Sea ice concentration [ice_conc] for northern hemisphere [nh] or southern hemisphere [sh] in non time critical [NT/ icdr/ osi-430-a].
 - Variables to read: `ice_conc`.
 - Example filename: `ice_conc_sh_ease2-250_icdr-v3p0_202509291200.nc`.
