@@ -11,6 +11,14 @@ Versions follow [Semantic Versioning](https://semver.org/); the version in
 ### Added
 
 - `ewc-community-hub`: new skill for drafting, validating and submitting EWC Community Hub catalogue items, with four eval cases.
+- `ml-menu`: a new skill that finds EUMETSAT climate data records on the Data
+  Store for long time series. Use cases are ML model training, trend analysis
+  and anomaly detection. It gives the collection ID, the filename filter and the
+  variable to read. It flags what breaks a long series: interim extensions,
+  satellite changes and sampling changes. It hands downloads to `eumdac`.
+- `ml-menu`: eval cases `prefix-filter-before-search`,
+  `record-choice-before-any-search`, `area-search-on-misplaced-footprint` and
+  `long-series-keeps-all-satellites`.
 
 ## [0.1.0] - 2026-10-24
 

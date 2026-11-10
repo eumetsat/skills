@@ -63,6 +63,7 @@ Read only the reference needed. Out of scope: science interpretation, generic pa
 
 | Intent | Reference |
 | --- | --- |
+| Climate data record (CDR) or long climate time series: which collection, filename filter, variable | If the `ml-menu` skill is installed, load it first for the collection, filename filter and variable; then return here for search and download |
 | Install, missing CLI, wrong Python | [install.md](references/install.md) |
 | Credentials, token, 401/403 | [auth.md](references/auth.md) |
 | List/describe collections or products | [datastore-discovery.md](references/datastore-discovery.md) |
